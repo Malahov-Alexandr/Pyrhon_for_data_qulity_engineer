@@ -15,8 +15,8 @@ rand_list = random.sample(range(0, 1000), 100)
 
 # an empy list for a sorted list
 sorted_list = []
-list_of_odd_numbers = []
-list_of_even_numbers = []
+odd_numbers = []
+even_numbers = []
 
 # while rand_list has the numbers execute next iteration
 while rand_list:
@@ -38,13 +38,13 @@ while rand_list:
 for i in sorted_list:
     # checking the number whether the number is  an odd number
     if i % 2 != 0:
-        list_of_odd_numbers.append(i)
+        odd_numbers.append(i)
     # if the number is not odd, adding the number to list_of_even numbers
     else:
-        list_of_even_numbers.append(i)
+        even_numbers.append(i)
 # print the average value of the list with the odd numbers, the sum of all the numbers in the list divide by length of
 # the numbers of the list
-print(f'The average value of odd numbers is {sum(list_of_odd_numbers) * len(list_of_odd_numbers)}')
+print(f'The average value of odd numbers is {sum(odd_numbers) / len(odd_numbers)}')
 # print the average value of the list with the even numbers the sum of all the numbers in the list divide by length
 # of the numbers of the list
-print(f'The Average value of the even numbers is {sum(list_of_even_numbers) * len(list_of_even_numbers)}')
+print(f'The Average value of the even numbers is {sum(even_numbers) / len(even_numbers)}')
