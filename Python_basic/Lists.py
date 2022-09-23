@@ -46,5 +46,5 @@ for i in sorted_list:
 # the numbers of the list
 print(f'The average value of odd numbers is {sum(odd_numbers) / len(odd_numbers)}')
 # print the average value of the list with the even numbers the sum of all the numbers in the list divide by length
-# of the numbers of the list
+# of the numbers of the list.
 print(f'The Average value of the even numbers is {sum(even_numbers) / len(even_numbers)}')
