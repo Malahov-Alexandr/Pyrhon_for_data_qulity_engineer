@@ -20,19 +20,11 @@ even_numbers = []
 
 # while rand_list has the numbers execute next iteration
 while rand_list:
-    # creation the variable for first number in rand_list
-    minimum = rand_list[0]  # arbitrary number in list
-    # call a number from the rand_list
-    for x in rand_list:
-        # comparing the iteration number with the first number in the rand_list
-        if x < minimum:
-            # if the iteration number lower than the first number of the rand_list, the iteration number become a new
-            # minimum number
-            minimum = x
-    # sorted_list append with the minimum number
-    sorted_list.append(minimum)
-    # deleting the iteration number from the rand_list
-    rand_list.remove(minimum)
+    # searching the min value from rand_list and append sorted list with this value
+    sorted_list.append(min(rand_list))
+    # deleting the min value from rand_list
+    rand_list.remove(min(rand_list))
+
 
 # searching the odd numbers from sorted list
 for i in sorted_list:
