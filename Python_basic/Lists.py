@@ -14,18 +14,10 @@ import random
 rand_list = random.sample(range(0, 1000), 100)
 
 # an empy list for a sorted list
-sorted_list = []
 odd_numbers = []
 even_numbers = []
-
-# while rand_list has the numbers execute next iteration
-while rand_list:
-    # searching the min value from rand_list and append sorted list with this value
-    sorted_list.append(min(rand_list))
-    # deleting the min value from rand_list
-    rand_list.remove(min(rand_list))
-
-
+# creating a sorted list
+sorted_list = sorted(rand_list)
 # searching the odd numbers from sorted list
 for i in sorted_list:
     # checking the number whether the number is  an odd number
