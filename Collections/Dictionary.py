@@ -14,36 +14,38 @@ import random
 import string
 
 new_dict = {}
-final_dict = {}
 # Creating a tuple with the letters for future dicts
 list_of_letters = string.ascii_lowercase
 # Creating an empty list with a random empty dicts
 list_of_dicts = [{} for _ in range(random.randint(2, 10))]
 # for each dict from list of dicts
-for current_dict in list_of_dicts:
+for dct in list_of_dicts:
     # count of iteration for numbers of keys
     for i in range(random.randint(1, len(list_of_letters))):
         # creating pairs keys and values, a key is taken from list if letters and assigned with value from 0 to 100
-        current_dict[random.choice(list_of_letters)] = random.randint(0, 100)
-# iteration for each dict in the list of dicts
-for current_dict in list_of_dicts:
-    # iteration for each key from a dict
-    for current_key in current_dict:
-        # check that the key is not in the new_dict, if key is not in the new_dict, new dict is updated with the
-        # key, and it's value
-        if current_key not in new_dict:
-            new_dict[current_key] = current_dict.get(current_key)
-# Iteration each dict in the list of the dicts
-for rest_dict in list_of_dicts:
-    # for each key in the dict
-    for rest_key in rest_dict:
-        # if the key is already in the new_dict then compare theis value and if new value is higher key is updated
-        # with '_' and the highest value
-        if rest_key in new_dict:
-            # comparing existed in the new_dict value and new value of the rest keys
-            if new_dict.get(rest_key) < rest_dict.get(rest_key):
-                # if a new key's value is higher than existed, current key has name "name+'_'" and new value
-                new_dict[rest_key + '_'] = rest_dict.get(rest_key)
-                # deleting old key from the dict
-                new_dict.pop(rest_key)
+        dct[random.choice(list_of_letters)] = random.randint(0, 100)
+# for each dict in the list of dicts
+for dct in list_of_dicts:
+    # print for debug
+    print(dct)
+    # for each key from the dict
+    for key in dct:
+        # If kye not in the dict, add key to new_dict
+        if key not in new_dict:
+            new_dict[key] = dct.get(key)
+
+# set variable for counting dicts
+number = 0
+# for each dict in list of dicts
+for dct in list_of_dicts:
+    # increase value by 1
+    number += 1
+    # for each key in dict
+    for ky in dct:
+        # if key has been already added to the new_dict, and it's value more that value already existed in the new_dict
+        if ky in new_dict and dct.get(ky) > new_dict.get(ky):
+            # assign for the key current name of the key + '_'+ number of dict
+            new_dict[f'{ky}_{number}'] = max(dct.get(ky), new_dict.get(ky))
+            # deleting old key
+            new_dict.pop(ky)
 print(new_dict)
