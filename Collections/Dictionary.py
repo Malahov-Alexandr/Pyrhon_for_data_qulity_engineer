@@ -13,7 +13,7 @@
 import random
 import string
 
-new_dict = {}
+general_dict = {}
 # Creating a tuple with the letters for future dicts
 list_of_letters = string.ascii_lowercase
 # Creating an empty list with a random empty dicts
@@ -31,8 +31,8 @@ for dct in list_of_dicts:
     # for each key from the dict
     for key in dct:
         # If kye not in the dict, add key to new_dict
-        if key not in new_dict:
-            new_dict[key] = dct.get(key)
+        if key not in general_dict:
+            general_dict[key] = dct.get(key)
 
 # set variable for counting dicts
 number = 0
@@ -43,9 +43,9 @@ for dct in list_of_dicts:
     # for each key in dict
     for ky in dct:
         # if key has been already added to the new_dict, and it's value more that value already existed in the new_dict
-        if ky in new_dict and dct.get(ky) > new_dict.get(ky):
+        if ky in general_dict and dct.get(ky) > general_dict.get(ky):
             # assign for the key current name of the key + '_'+ number of dict
-            new_dict[f'{ky}_{number}'] = max(dct.get(ky), new_dict.get(ky))
+            general_dict[f'{ky}_{number}'] = max(dct.get(ky), general_dict.get(ky))
             # deleting old key
-            new_dict.pop(ky)
-print(new_dict)
+            general_dict.pop(ky)
+print(general_dict)
