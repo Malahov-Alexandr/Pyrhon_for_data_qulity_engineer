@@ -14,16 +14,14 @@ import random
 import string
 
 general_dict = {}
-# Creating a tuple with the letters for future dicts
-list_of_letters = string.ascii_lowercase
 # Creating an empty list with a random empty dicts
 list_of_dicts = [{} for _ in range(random.randint(2, 10))]
 # for each dict from list of dicts
 for dct in list_of_dicts:
     # count of iteration for numbers of keys
-    for i in range(random.randint(1, len(list_of_letters))):
+    for i in range(random.randint(1, len(string.ascii_lowercase))):
         # creating pairs keys and values, a key is taken from list if letters and assigned with value from 0 to 100
-        dct[random.choice(list_of_letters)] = random.randint(0, 100)
+        dct[random.choice(string.ascii_lowercase)] = random.randint(0, 100)
 # for each dict in the list of dicts
 for dct in list_of_dicts:
     # print for debug
@@ -41,11 +39,11 @@ for dct in list_of_dicts:
     # increase value by 1
     number += 1
     # for each key in dict
-    for ky in dct:
+    for key in dct:
         # if key has been already added to the new_dict, and it's value more that value already existed in the new_dict
-        if ky in general_dict and dct.get(ky) > general_dict.get(ky):
+        if key in general_dict and dct.get(key) > general_dict.get(key):
             # assign for the key current name of the key + '_'+ number of dict
-            general_dict[f'{ky}_{number}'] = max(dct.get(ky), general_dict.get(ky))
+            general_dict[f'{key}_{number}'] = max(dct.get(key), general_dict.get(key))
             # deleting old key
-            general_dict.pop(ky)
-print(general_dict)
+            general_dict.pop(key)
+print({key: general_dict[key] for key in sorted(general_dict)})
