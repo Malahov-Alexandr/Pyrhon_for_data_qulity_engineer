@@ -10,40 +10,45 @@
 #
 # Commit script to git repository and provide link as home task result.
 
+
 import random
 import string
-
+final_dict = {}
 general_dict = {}
+list_with_idex = {}
 # Creating an empty list with a random empty dicts
-list_of_dicts = [{} for _ in range(random.randint(2, 10))]
-# for each dict from list of dicts
+list_of_dicts = [{'a': 5, 'b': 7, 'g': 11}, {'a': 3, 'c': 35, 'g': 42}]
+#for each dict from list of dicts
 for dct in list_of_dicts:
     # count of iteration for numbers of keys
     for i in range(random.randint(1, len(string.ascii_lowercase))):
         # creating pairs keys and values, a key is taken from list if letters and assigned with value from 0 to 100
         dct[random.choice(string.ascii_lowercase)] = random.randint(0, 100)
-# for each dict in the list of dicts
+#for each dict in the list of dicts
 for dct in list_of_dicts:
-    # print for debug
     print(dct)
     # for each key from the dict
     for key in dct:
         # If kye not in the dict, add key to new_dict
         if key not in general_dict:
             general_dict[key] = dct.get(key)
+        elif key in general_dict:
+            general_dict[key] = max(dct.get(key),general_dict.get(key))
+#add an index of a dict to the key
+for i,dict in enumerate(list_of_dicts,start=1):
+    for key in general_dict:
+        for gkey in dict:
+            if general_dict.get(key) == dict.get(key):
+                list_with_idex[f'{key}_{i}'] = general_dict.get(key)
+# if key more than one in the dicts, name of the key is just a lette, without index
+for key in list_with_idex:
+    #count how many times the key has been met in dicts
+    s = sum(key[0] in d for d in list_of_dicts)
+    if s == 1:
+        final_dict[key[0]] = list_with_idex.get(key)
+    else:
+        final_dict[key] = list_with_idex.get(key)
 
-# set variable for counting dicts
-number = 0
-# for each dict in list of dicts
-for dct in list_of_dicts:
-    # increase value by 1
-    number += 1
-    # for each key in dict
-    for key in dct:
-        # if key has been already added to the new_dict, and it's value more that value already existed in the new_dict
-        if key in general_dict and dct.get(key) > general_dict.get(key):
-            # assign for the key current name of the key + '_'+ number of dict
-            general_dict[f'{key}_{number}'] = max(dct.get(key), general_dict.get(key))
-            # deleting old key
-            general_dict.pop(key)
-print({key: general_dict[key] for key in sorted(general_dict)})
+
+
+print({key: final_dict[key] for key in sorted(final_dict)})
