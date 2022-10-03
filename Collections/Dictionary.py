@@ -17,13 +17,15 @@ final_dict = {}
 general_dict = {}
 list_with_idex = {}
 # Creating an empty list with a random empty dicts
-list_of_dicts = [{'a': 5, 'b': 7, 'g': 11}, {'a': 3, 'c': 35, 'g': 42}]
-#for each dict from list of dicts
-for dct in list_of_dicts:
+list_of_letters = string.ascii_lowercase
+# Creating an empty list with a random empty dicts
+list_of_dicts = [{} for _ in range(random.randint(2, 10))]
+# for each dict from list of dicts
+for current_dict in list_of_dicts:
     # count of iteration for numbers of keys
-    for i in range(random.randint(1, len(string.ascii_lowercase))):
+    for i in range(random.randint(1, len(list_of_letters))):
         # creating pairs keys and values, a key is taken from list if letters and assigned with value from 0 to 100
-        dct[random.choice(string.ascii_lowercase)] = random.randint(0, 100)
+        current_dict[random.choice(list_of_letters)] = random.randint(0, 100)
 #for each dict in the list of dicts
 for dct in list_of_dicts:
     print(dct)
