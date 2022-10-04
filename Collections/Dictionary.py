@@ -11,46 +11,39 @@
 # Commit script to git repository and provide link as home task result.
 
 
-import random
-import string
-final_dict = {}
-general_dict = {}
-list_with_idex = {}
-# Creating an empty list with a random empty dicts
-list_of_letters = string.ascii_lowercase
-# Creating an empty list with a random empty dicts
-list_of_dicts = [{} for _ in range(random.randint(2, 10))]
-# for each dict from list of dicts
-for current_dict in list_of_dicts:
-    # count of iteration for numbers of keys
-    for i in range(random.randint(1, len(list_of_letters))):
-        # creating pairs keys and values, a key is taken from list if letters and assigned with value from 0 to 100
-        current_dict[random.choice(list_of_letters)] = random.randint(0, 100)
-#for each dict in the list of dicts
-for dct in list_of_dicts:
-    print(dct)
-    # for each key from the dict
-    for key in dct:
-        # If kye not in the dict, add key to new_dict
-        if key not in general_dict:
-            general_dict[key] = dct.get(key)
-        elif key in general_dict:
-            general_dict[key] = max(dct.get(key),general_dict.get(key))
-#add an index of a dict to the key
-for i,dict in enumerate(list_of_dicts,start=1):
-    for key in general_dict:
-        for gkey in dict:
-            if general_dict.get(key) == dict.get(key):
-                list_with_idex[f'{key}_{i}'] = general_dict.get(key)
-# if key more than one in the dicts, name of the key is just a lette, without index
-for key in list_with_idex:
-    #count how many times the key has been met in dicts
-    s = sum(key[0] in d for d in list_of_dicts)
-    if s == 1:
-        final_dict[key[0]] = list_with_idex.get(key)
-    else:
-        final_dict[key] = list_with_idex.get(key)
+def dicts_generator():
+    import random
+    import string
+    # Creating an empty list with a random empty dicts
+    list_of_dicts = [{} for _ in range(random.randint(2, 10))]
+    # for each dict from list of dicts
+    for current_dict in list_of_dicts:
+        # count of iteration for numbers of keys
+        for i in range(random.randint(1, len(string.ascii_lowercase))):
+            # creating pairs keys and values, a key is taken from list if letters and assigned with value from 0 to 100
+            current_dict[random.choice(string.ascii_lowercase)] = random.randint(0, 100)
+    return list_of_dicts
 
 
+def key_counter(lst):
+    import collections
+    # create a list and collect all value of each key
+    result = collections.defaultdict(list)
+    for dictionary in lst:
+        for key, value in dictionary.items():
+            result[key].append(value)
+    return result
 
-print({key: final_dict[key] for key in sorted(final_dict)})
+
+def max_value(m_value):
+    final_dict = {}
+    # found index of max value and add it to the name of the key
+    for key, value in m_value.items():
+        if len(value) > 1:
+            final_dict[f'{key}_{value.index(max(value)) + 1}'] = max(value)
+        else:
+            final_dict[key] = max(value)
+    print(final_dict)
+
+
+max_value(key_counter(dicts_generator()))
