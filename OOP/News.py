@@ -8,29 +8,29 @@
 # 2.Приватное объявление – на входе текст и дата истечения срока действия. Оставшийся день рассчитывается во время публикации.
 # 3. Ваш уникальный с уникальными правилами публикации.
 
-
+# Created a constractor witch will add new publication to the txt file
 class File_creator:
 
     def record_to_file(self, text):
         with open("result.txt", "a+") as f:
             f.write(text)
 
-
-
+# create a class wich will be creating a news
 class News(File_creator):
-    import datetime
 
     def __init__(self, city, text):
         self.city = city
         self.text = text
+    # created constructer wich will be creating a news and add it to the txt file
 
     def new_constr(self):
         import datetime
-        text = f'\nNews {"-"*25}\n{self.text}\n{self.city}, {datetime.date.today()}\n{"-" * 30}\n\n'
+        text = f'\nNews {"-" * 25}\n{self.text}\n{self.city}, {datetime.date.today()}\n{"-" * 30}\n\n'
         gener = File_creator()
         gener.record_to_file(text)
 
 
+# created constructer wich will be creating an adv and add it to the txt file
 class Adv(File_creator):
     def __init__(self, text, date):
         self.text = text
@@ -41,14 +41,35 @@ class Adv(File_creator):
         return datetime.date.today() + datetime.timedelta(self.date)
 
     def generator_of_adv(self):
-        text = f'\nPrivate Ad{"-"*20}\n{self.text}\n{self.calculate_date()}, {self.date} days left\n\n '
+        text = f'\nPrivate Ad{"-" * 20}\n{self.text}\n{self.calculate_date()}, {self.date} days left\n\n '
         gener = File_creator()
         gener.record_to_file(text)
 
 
-t = News('Bar', 'greatesh event has comming')
-t.new_constr()
+# created class wich invoke a class after wheh user will be asked about a type of publication
+class Generator(Adv, News):
 
-# a = Adv('I will sell', 30)
-# a.generator_of_adv()
-print(len('------------------------------------------------------'))
+    @classmethod
+    def comunnication_with_user(cls):
+        while True:
+            text = input('Please, input the type of publication (News or Adv) if you do not want to add a publication enter "stop": ').lower()
+            if text == 'news':
+                text = input('Please, enter your text of the news: ')
+                city = input('Please, enter the city where it happend: ')
+                myobj = News(city, text)
+                myobj.new_constr()
+            elif text == 'adv':
+                text = input('Please, input the text of the adv: ')
+                days = int((input('Please, input period after how many days adv will be available: ')))
+                myobj = Adv(text, days)
+                myobj.generator_of_adv()
+            elif text == 'stop':
+                break
+            else:
+                print('Incorrect enter. Please, only News,Adv or 0')
+
+
+myobj = Generator.comunnication_with_user()
+
+
+
