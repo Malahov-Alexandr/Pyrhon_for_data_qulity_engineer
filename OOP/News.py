@@ -12,7 +12,7 @@
 class File_creator:
 
     def record_to_file(self, text):
-        with open("result.txt", "a+") as f:
+        with open("OOP/result.txt", "a+") as f:
             f.write(text)
 
 # create a class wich will be creating a news
@@ -46,13 +46,25 @@ class Adv(File_creator):
         gener.record_to_file(text)
 
 
+class Joke(File_creator):
+    def __init__(self, text, answer, rate):
+        self.text = text
+        self.rate = rate
+        self.answer = answer
+
+    def joke_generator(self):
+        text = f'\nJoke{"-" * 26}\n{self.text}\n{self.answer}\nFunny meter  {self.rate} of 10\n\n'
+        gener = File_creator()
+        gener.record_to_file(text) 
+
+
 # created class wich invoke a class after wheh user will be asked about a type of publication
 class Generator(Adv, News):
 
     @classmethod
     def comunnication_with_user(cls):
         while True:
-            text = input('Please, input the type of publication (News or Adv) if you do not want to add a publication enter "stop": ').lower()
+            text = input('Please, input the type of publication (News or Adv or Joke) if you do not want to add a publication enter "stop": ').lower()
             if text == 'news':
                 text = input('Please, enter your text of the news: ')
                 city = input('Please, enter the city where it happend: ')
@@ -63,6 +75,12 @@ class Generator(Adv, News):
                 days = int((input('Please, input period after how many days adv will be available: ')))
                 myobj = Adv(text, days)
                 myobj.generator_of_adv()
+            elif text == 'joke':
+                text = input('Please, enter the joke question: ')
+                answer = input('Please, enter the answer for the joke: ')
+                rate = int(input('Enter the rate of this joke: '))
+                myobj = Joke(text, answer, rate)
+                myobj.joke_generator()
             elif text == 'stop':
                 break
             else:
@@ -70,6 +88,3 @@ class Generator(Adv, News):
 
 
 myobj = Generator.comunnication_with_user()
-
-
-
