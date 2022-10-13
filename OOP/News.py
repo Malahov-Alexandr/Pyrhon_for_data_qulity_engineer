@@ -42,7 +42,7 @@ class Adv:
         return datetime.date.today() + datetime.timedelta(self.date)
 
     def text_generator(self):
-        text = f'\nPrivate Ad{"-" * 20}\n{self.text}\n{self.calculate_date()}, {self.date} days left\n\n '
+        text = f'\nPrivate Ad\n{self.text}\n{self.calculate_date()}, {self.date} days left\n\n '
         record_to_file(text)
 
 
@@ -57,7 +57,7 @@ class Joke:
         self.rate = rate
 
     def text_generator(self):
-        text = f'\nJoke{"-" * 26}\n{self.text}\n{self.answer}\nFunny meter  {self.rate} of 10\n\n'
+        text = f'\nJoke\n{self.text}\n{self.answer}\nFunny meter  {self.rate} of 10\n\n'
         record_to_file(text)
 
 
