@@ -91,5 +91,4 @@ def communication_with_user():
         else:
             print('Incorrect enter. Please, only News,Adv or stop')
 
-
 communication_with_user()
