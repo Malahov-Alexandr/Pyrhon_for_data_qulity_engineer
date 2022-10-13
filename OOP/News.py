@@ -21,7 +21,9 @@ def record_to_file(text):
 class News:
 
     def __init__(self, city, text):
+        # the name of the city where it happend -str
         self.city = city
+        # the text of a news - str
         self.text = text
 
     # create constructor which will be creating a news and add it to the txt file
@@ -34,7 +36,9 @@ class News:
 # created constructor which will be creating an adv and add it to the txt file
 class Adv:
     def __init__(self, text, date):
+        # the text of the adv - str
         self.text = text
+        # date after how many days adv will be expired- int
         self.date = date
 
     def calculate_date(self):
@@ -42,22 +46,22 @@ class Adv:
         return datetime.date.today() + datetime.timedelta(self.date)
 
     def text_generator(self):
-        text = f'\nPrivate Ad{"-" * 20}\n{self.text}\n{self.calculate_date()}, {self.date} days left\n\n '
+        text = f'\nPrivate Ad\n{self.text}\n{self.calculate_date()}, {self.date} days left\n\n '
         record_to_file(text)
 
 
 # created constuctor which will be creating a joke like the Armenian radio and add it to the txt file
 class Joke:
     def __init__(self, question, answer, rate):
-        # user need to enter a question
+        # user need to enter a question -str
         self.text = question
-        # user add an aswer for the question
+        # user add an aswer for the question - str
         self.answer = answer
-        # user add the int number of rate for this joke
+        # user add the int number of rate for this joke - int
         self.rate = rate
 
     def text_generator(self):
-        text = f'\nJoke{"-" * 26}\n{self.text}\n{self.answer}\nFunny meter  {self.rate} of 10\n\n'
+        text = f'\nJoke\n{self.text}\n{self.answer}\nFunny meter  {self.rate} of 10\n\n'
         record_to_file(text)
 
 
