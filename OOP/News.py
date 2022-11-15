@@ -1,12 +1,14 @@
 import os.path
 import datetime
 
+from Python_for_DQE.String_Object.Strings import delete_empty_elements, normalize_text
+
 
 # create a new txt file with the publication and then delete it
-def record_to_file(text, path='C:\\Users\\'):
+def record_to_file(text, path=None):
     with open(os.path.join(path + 'result.txt'), 'a+') as f:
         f.write(text)
-    os.remove(path + 'result.txt')
+    # os.remove(path + 'result.txt')
 
 
 # create a class that will be creating a news
@@ -16,7 +18,7 @@ class News:
         # the name of the city where it happened -str
         self.city = city
         # the text of a news-str
-        self.text = text
+        self.text = delete_empty_elements(text)
 
     # create a constructor which will be creating news and add it to the txt file
 
@@ -29,8 +31,8 @@ class News:
 class Adv:
     def __init__(self, text, date):
         # the text of the adv - str
-        self.text = text
-        # date after how many days adv will be expired- int
+        self.text = delete_empty_elements(text)
+        # date after how many days adv will be expired (int)
         self.date = date
 
     def calculate_date(self):
@@ -46,9 +48,9 @@ class Adv:
 class Joke:
     def __init__(self, question, answer, rate):
         # user needs to enter a question -str
-        self.text = question
+        self.text = delete_empty_elements(question)
         # user adds answer for the question - str
-        self.answer = answer
+        self.answer = delete_empty_elements(answer)
         # user adds the int number of rate for this joke - int
         self.rate = rate
 
@@ -62,7 +64,7 @@ def path():
     path_for_file = input(
         'If you want to save the adv by default path enter "0", if you want to enter your own path, enter "1": ')
     if path_for_file == '0':
-        return 'C:\\Users\\'
+        return 'C:\\Users\\Aliaksandr_Malakhau1\\epam_learn\\'
 
     else:
         return input('Please enter a new path to save the adv ( example C:\\Users\\): ')
@@ -79,6 +81,7 @@ def counter_of_adv():
 # created class which invokes a class after when a user is asked about a type of publication
 class GeneratorOfAdv:
     for adv in range(counter_of_adv()):
+
         text = input('Please, input the type of publication (News or Adv or Joke): ').lower()
         if text == 'news':
             text = input('Please, enter your text of the news: ')
@@ -102,4 +105,3 @@ class GeneratorOfAdv:
 
 
 GeneratorOfAdv
-

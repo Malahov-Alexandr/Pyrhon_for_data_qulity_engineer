@@ -15,10 +15,11 @@ text = '''homEwork:
   last iz TO calculate nuMber OF Whitespace characteRS in this Tex. caREFULL, not only Spaces, but ALL whitespaces. I got 87.'''
 
 
-def delete_empty_elements(text):
-    text = text.replace('\n', '')
-    text = text.replace('  ', ' ')
-    return text
+def delete_empty_elements(n):
+    while '\n' in n or '  ' in n:
+        n = n.replace('\n', '')
+        n = n.replace('  ', ' ')
+    return n
 
 
 def normalize_text(text):
@@ -61,6 +62,4 @@ def counter_of_elements(text):
     return text.count(element_1)
 
 
-print(correction_of_the_text(add_new_sentense_after_the_word(normalize_text(delete_empty_elements(text)))))
-print(counter_of_elements(
-    correction_of_the_text(add_new_sentense_after_the_word(normalize_text(delete_empty_elements(text))))))
+
