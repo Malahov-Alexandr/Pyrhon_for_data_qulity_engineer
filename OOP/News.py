@@ -1,7 +1,31 @@
 import os.path
 import datetime
+import csv
+from Python_for_DQE.String_Object.Strings import delete_empty_elements
 
-from Python_for_DQE.String_Object.Strings import delete_empty_elements, normalize_text
+
+# count frequency of a letter in a text
+def frequency(text, sign):
+    counter: int = 0
+    for s in text:
+        if s != sign:
+            continue
+        counter += 1
+    return counter
+
+
+# count percents and write it to a csv file
+def percents(text):
+    with open('percents.csv', 'w', newline='') as csvfile:
+        csvwriter = csv.writer(csvfile, delimiter=',')
+        field_names = ['Letter', 'frequency', 'percent']
+        csvwriter.writerow(field_names)
+        for s in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ':
+
+            how_many = frequency(text.lower(), s)
+            if how_many > 0:
+                percent = 100 * how_many / len(text)
+                csvwriter.writerow(f'{s}{how_many}{str(round(percent))}')
 
 
 # create a new txt file with the publication and then delete it
@@ -25,6 +49,7 @@ class News:
     def text_generator(self):
         text = f'\nNews \n{self.text}\n{self.city}, {datetime.date.today()}\n\n'
         record_to_file(text, path())
+        percents(text)
 
 
 # created constructor which will be creating an adv and add it to the txt file
@@ -104,4 +129,4 @@ class GeneratorOfAdv:
             print('Incorrect enter. Please, only News, Adv or Joke')
 
 
-GeneratorOfAdv
+GeneratorOfAdv()
